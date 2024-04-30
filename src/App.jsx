@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 // const App = () => {
 //   const [left, setLeft] = useState(0)
@@ -29,21 +29,26 @@ import { useState } from "react";
 // };
 
 // export default App;
-const App = () => {
-  const [counter, setCounter] = useState(0)
 
-  const handleClick = () => {
-    console.log('he clicado');
-  }
-  
+const Display = ({ counter }) => <div>{counter}</div>;
+
+const Button = ({ onSmash, text}) => <button onClick={onSmash}>{text}</button>
+
+const App = () => {
+  const [counter, setCounter] = useState(0);
+
+  const increaseByOne = () => setCounter(counter + 1);
+  const decreaseByOne = () => setCounter(counter - 1)
+  const setToZero = () => setCounter(0);
+
   return (
     <>
-    <div>{counter}</div>
-    <button onClick={() => setCounter(counter + 1)}>plus</button>
-    <button onClick={() => setCounter(0)}>zero</button>
+      <Display counter={counter} />
+      <Button onSmash={increaseByOne} text='plus' />
+      <Button onSmash={decreaseByOne} text='minus' />
+      <Button onSmash={setToZero} text='zero' />
     </>
-  )
-}
+  );
+};
 
 export default App;
-
