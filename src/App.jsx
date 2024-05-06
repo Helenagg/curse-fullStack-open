@@ -23,6 +23,13 @@ const App = () => {
     setBadValue(badValue + 1)
   }
 
+  const total = goodValue + neutralValue + badValue
+
+  const weightedTotal = (goodValue * 1) + (neutralValue * 0) + (badValue * -1);
+  const average = weightedTotal / total;
+
+  const percentageGood = (goodValue / total) * 100 
+
   return (
     <div>
       <Display text={'Give feedback'} />
@@ -33,6 +40,9 @@ const App = () => {
       <Results text='Good: ' result={goodValue} />
       <Results text='Neutral: ' result={neutralValue} />
       <Results text='Bad: ' result={badValue} />
+      <Results text='Total: ' result={total} />
+      <Results text='Average: ' result={average} />
+      <Results text='Positive: ' result={percentageGood + '%' } />
     </div>
   )
 };
