@@ -1,92 +1,35 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>{text}</button>
-);
-
-const StatisticsTable = ({ data }) => {
-  return (
-    <table>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={index}>
-            <td>{item.text}</td>
-            <td>{item.value}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
-
-const Statistics = (props) => {
-  if (!props.goodValue && !props.neutralValue && !props.badValue) {
-    return (
-      <div>
-        <p>No feedback given</p>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <StatisticsTable
-        data={[
-          { text: "Good: ", value: props.goodValue },
-          { text: "Neutral: ", value: props.neutralValue },
-          { text: "Bad: ", value: props.badValue },
-          { text: "Total: ", value: props.total },
-          { text: "Average: ", value: props.average },
-          { text: "Percentage: ", value: props.percentageGood },
-        ]}
-      />
-    </div>
-  );
-};
+// const Button = ({ handleClick, text }) => (
+//   <button onClick={handleClick}>{text}</button>
+// );
 
 const App = () => {
-  const [goodValue, setGoodValue] = useState(0);
-  const [neutralValue, setNeutralValue] = useState(0);
-  const [badValue, setBadValue] = useState(0);
+  const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
+    'The only way to go fast, is to go well.',
+  ];
 
-  const handleGoodClick = () => {
-    setGoodValue(goodValue + 1);
+  const [selected, setSelected] = useState(0);
+
+  const handleSelectedClick = () => {
+    const value = Math.ceil(Math.random() * 7);
+    console.log(value);
+    setSelected(value);
   };
-
-  const handleNeutralClick = () => {
-    setNeutralValue(neutralValue + 1);
-  };
-
-  const handleBadClick = () => {
-    setBadValue(badValue + 1);
-  };
-
-  const total = goodValue + neutralValue + badValue;
-
-  const weightedTotal = goodValue * 1 + neutralValue * 0 + badValue * -1;
-  const average = weightedTotal / total;
-
-  const percentageGood = (goodValue / total) * 100;
 
   return (
     <div>
+      <div>{anecdotes[selected]}</div>
       <div>
-        <p>Give FeedBack</p>
+        <button onClick={handleSelectedClick}>Select</button>
       </div>
-      <Button handleClick={handleGoodClick} text='Good' />
-      <Button handleClick={handleNeutralClick} text='Neutral' />
-      <Button handleClick={handleBadClick} text='Bad' />
-      <div>
-        <p>Statistics</p>
-      </div>
-      <Statistics
-        goodValue={goodValue}
-        neutralValue={neutralValue}
-        badValue={badValue}
-        total={total}
-        average={average}
-        percentageGood={percentageGood}
-      />
     </div>
   );
 };
