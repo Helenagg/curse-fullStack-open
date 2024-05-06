@@ -36,6 +36,8 @@ import { useState } from "react";
       {/* <Display text={"Statistics"} /> */}
       {/* <Statistics good={goodValue} neutral={neutralValue} bad={badValue} /> */}
 
+const Statistics = (props) => <div>{props.text}{props.value}</div>
+
 const App = () => {
   const [goodValue, setGoodValue] = useState(0);
   const [neutralValue, setNeutralValue] = useState(0);
@@ -71,12 +73,12 @@ const App = () => {
       <div>
         <p>Statistics</p>
       </div>
-      <p>Good: {goodValue}</p>
-      <p>Neutral: {neutralValue}</p>
-      <p>Bad: {badValue}</p>
-      <p>Total: {total}</p>
-      <p>Average: {average}</p>
-      <p>Percentage: {percentageGood}</p>
+      <Statistics text='Good: ' value={goodValue} />
+      <Statistics text='Neutral: ' value={neutralValue} />
+      <Statistics text='Bad: ' value={badValue} />
+      <Statistics text='Total: ' value={total} />
+      <Statistics text='Average: ' value={average} />
+      <Statistics text='Percentage: ' value={percentageGood} />
     </div>
   );
 };
