@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 
-const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
 // const Display = (props) => <div>{props.text}</div>;
 
@@ -28,49 +27,32 @@ const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</
 //   );
 // };
 
-{
-  /* <Display text={"Give feedback"} /> */
-}
-{
-  /* <Button handleClick={handleGoodClick} text='Good' /> */
-}
-{
-  /* <Button handleClick={handleNeutralClick} text='Neutral' /> */
-}
-{
-  /* <Button handleClick={handleBadClick} text='Bad' /> */
-}
-{
-  /* <Display text={"Statistics"} /> */
-}
-{
-  /* <Statistics good={goodValue} neutral={neutralValue} bad={badValue} /> */
-}
+const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
-const Statistics = (props) => (
+const StatisticsLine = (props) => (
   <div>
     {props.text}
     {props.value}
   </div>
 );
 
-const OpenStatistics = (props) => {
+const Statistics = (props) => {
   if (!props.goodValue && !props.neutralValue && !props.badValue) {
     return (
       <div>
-        <p>no feedback given</p>
+        <p>No feedback given</p>
       </div>
     );
   }
 
   return (
     <div>
-      <Statistics text='Good: ' value={props.goodValue} />
-      <Statistics text='Neutral: ' value={props.neutralValue} />
-      <Statistics text='Bad: ' value={props.badValue} />
-      <Statistics text='Total: ' value={props.total} />
-      <Statistics text='Average: ' value={props.average} />
-      <Statistics text='Percentage: ' value={props.percentageGood} />
+      <StatisticsLine text='Good: ' value={props.goodValue} />
+      <StatisticsLine text='Neutral: ' value={props.neutralValue} />
+      <StatisticsLine text='Bad: ' value={props.badValue} />
+      <StatisticsLine text='Total: ' value={props.total} />
+      <StatisticsLine text='Average: ' value={props.average} />
+      <StatisticsLine text='Percentage: ' value={props.percentageGood} />
     </div>
   );
 };
@@ -110,7 +92,7 @@ const App = () => {
       <div>
         <p>Statistics</p>
       </div>
-      <OpenStatistics 
+      <Statistics 
         goodValue={goodValue}
         neutralValue={neutralValue}
         badValue={badValue}
