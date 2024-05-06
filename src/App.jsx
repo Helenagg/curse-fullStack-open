@@ -1,40 +1,23 @@
 import { useState } from "react";
 
-
-
-// const Display = (props) => <div>{props.text}</div>;
-
-// const Results = ({ text, result }) => <div>{text}{result}</div>
-
-// const Statistics = ({ good, neutral, bad }) => {
-
-//   const total = good + neutral + bad;
-
-//   const weightedTotal = good * 1 + neutral * 0 + bad * -1;
-//   const average = weightedTotal / total;
-
-//   const percentageGood = (good / total) * 100;
-
-//   return (
-//     <div>
-//       <Results text='Good: ' result={good} />
-//       <Results text='Neutral: ' result={neutral} />
-//       <Results text='Bad: ' result={bad} />
-//       <Results text='Total: ' result={total} />
-//       <Results text='Average: ' result={average ? average : 0} />
-//       <Results text='Positive: ' result={percentageGood ? percentageGood + "%" : 0} />
-//     </div>
-//   );
-// };
-
-const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
-
-const StatisticsLine = (props) => (
-  <div>
-    {props.text}
-    {props.value}
-  </div>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>{text}</button>
 );
+
+const StatisticsTable = ({ data }) => {
+  return (
+    <table>
+      <tbody>
+        {data.map((item, index) => (
+          <tr key={index}>
+            <td>{item.text}</td>
+            <td>{item.value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
 const Statistics = (props) => {
   if (!props.goodValue && !props.neutralValue && !props.badValue) {
@@ -47,12 +30,16 @@ const Statistics = (props) => {
 
   return (
     <div>
-      <StatisticsLine text='Good: ' value={props.goodValue} />
-      <StatisticsLine text='Neutral: ' value={props.neutralValue} />
-      <StatisticsLine text='Bad: ' value={props.badValue} />
-      <StatisticsLine text='Total: ' value={props.total} />
-      <StatisticsLine text='Average: ' value={props.average} />
-      <StatisticsLine text='Percentage: ' value={props.percentageGood} />
+      <StatisticsTable
+        data={[
+          { text: "Good: ", value: props.goodValue },
+          { text: "Neutral: ", value: props.neutralValue },
+          { text: "Bad: ", value: props.badValue },
+          { text: "Total: ", value: props.total },
+          { text: "Average: ", value: props.average },
+          { text: "Percentage: ", value: props.percentageGood },
+        ]}
+      />
     </div>
   );
 };
@@ -92,7 +79,7 @@ const App = () => {
       <div>
         <p>Statistics</p>
       </div>
-      <Statistics 
+      <Statistics
         goodValue={goodValue}
         neutralValue={neutralValue}
         badValue={badValue}
