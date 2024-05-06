@@ -51,9 +51,14 @@ const App = () => {
 
   const handleBadClick = () => {
     setBadValue(badValue + 1);
-  };
+  };  
 
-  
+  const total = goodValue + neutralValue + badValue;
+
+  const weightedTotal = goodValue * 1 + neutralValue * 0 + badValue * -1;
+  const average = weightedTotal / total;
+
+  const percentageGood = (goodValue / total) * 100;
 
   return (
     <div>
@@ -69,7 +74,9 @@ const App = () => {
       <p>Good: {goodValue}</p>
       <p>Neutral: {neutralValue}</p>
       <p>Bad: {badValue}</p>
-     
+      <p>Total: {total}</p>
+      <p>Average: {average}</p>
+      <p>Percentage: {percentageGood}</p>
     </div>
   );
 };
