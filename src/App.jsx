@@ -18,6 +18,8 @@ const History = ({ allClicks }) => {
 
 const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
+const Display = (props) => <div>{props.value}</div>
+
 const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
@@ -46,17 +48,17 @@ const App = () => {
   return (
     // <div>
     //   {left}
-    //   <Button handleClick={hello('world')} text={'left'} />
+    //   <Button handleClick={handleLeftClick} text={'left'} />
     //   <Button handleClick={handleRightClick} text={'right'} />
     //   {right}
     //   <History allClicks={allClicks} />
     //   <p>total: {total}</p>
     // </div>
     <div>
-      {value}
-      <button onClick={() => setToValue(1000)}>thousand</button>
-      <button onClick={() => setToValue(0)}>reset</button>
-      <button onClick={() => setToValue(value + 1)}>increment</button>
+      <Display value={value} />
+      <Button handleClick={() => setToValue(1000)} text='thousand' />
+      <Button handleClick={() => setToValue(0)} text='reset' />
+      <Button handleClick={() => setToValue(value + 1)} text='increment' />
     </div>
   )
 };
