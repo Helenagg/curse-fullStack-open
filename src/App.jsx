@@ -1,14 +1,18 @@
-const Header = ({ title }) => {
-  return <h1>{title}</h1>;
-};
+const Header = ({ title }) => <h1>{title}</h1>;
 
-const Course = ({ courseName, exercise }) => {
+const Course = ({ courseName, exercise }) => (
+  <>
+    <p>
+      {courseName} {exercise}
+    </p>
+  </>
+);
+
+export const SumExercises = ({ sum }) => {
   return (
-    <>
-      <p>
-        {courseName} {exercise}
-      </p>
-    </>
+    <div>
+      <p>{sum}</p>
+    </div>
   );
 };
 
@@ -32,6 +36,11 @@ const App = () => {
         exercises: 14,
         id: 3,
       },
+      {
+        name: "Redux",
+        exercises: 11,
+        id: 4,
+      },
     ],
   };
 
@@ -39,8 +48,16 @@ const App = () => {
     <>
       <Header title={course.name} />
       {course.parts.map((part) => (
-        <Course courseName={part.name} exercise={part.exercises} />
+        <Course
+          key={part.id}
+          courseName={part.name}
+          exercise={part.exercises}
+        />
       ))}
+
+      <SumExercises sum={course.parts.map(exercise => {
+        console.log(++exercise.exercises)
+      })} />
     </>
   );
 };
