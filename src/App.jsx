@@ -11,7 +11,7 @@ const Course = ({ courseName, exercise }) => (
 export const SumExercises = ({ sum }) => {
   return (
     <div>
-      <p>{sum}</p>
+      <p>Total exercises: {sum}</p>
     </div>
   );
 };
@@ -44,6 +44,10 @@ const App = () => {
     ],
   };
 
+
+  const sum = course.parts.map((part) => part.exercises).reduce((accumulator, newValue) => accumulator + newValue, 0)
+  console.log('sum', sum);
+
   return (
     <>
       <Header title={course.name} />
@@ -55,9 +59,7 @@ const App = () => {
         />
       ))}
 
-      <SumExercises sum={course.parts.map(exercise => {
-        console.log(++exercise.exercises)
-      })} />
+      <SumExercises sum={sum} />
     </>
   );
 };
