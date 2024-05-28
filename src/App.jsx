@@ -1,20 +1,4 @@
-const Header = ({ title }) => <h1>{title}</h1>;
-
-const Course = ({ courseName, exercise }) => (
-  <>
-    <p>
-      {courseName} {exercise}
-    </p>
-  </>
-);
-
-export const SumExercises = ({ sum }) => {
-  return (
-    <div>
-      <p>Total exercises: {sum}</p>
-    </div>
-  );
-};
+import Course, { Header, SumExercises } from "./components/Course";
 
 const App = () => {
   const course = [
@@ -62,36 +46,27 @@ const App = () => {
     },
   ];
 
-  // const total = course.map((item) => {
-  //   const newExercise = item.parts;
-  //   const sum = newExercise.map((exercise) => exercise.exercises).reduce((accumulator, newValue) => accumulator + newValue, 0)
-  //   console.log('total value', sum);
-  //   return sum
-  // }) //.reduce((accumulator, newValue) => accumulator + newValue, 0)
-// console.log('total', total);
   return (
     <>
       {course.map((newCourse) => {
-        const total = newCourse.parts.reduce((acc, part) => acc + part.exercises, 0)
-        console.log('total', newCourse.parts);
+        const total = newCourse.parts.reduce(
+          (acc, part) => acc + part.exercises,
+          0
+        );
         return (
           <>
             <Header key={newCourse.id} title={newCourse.name} />
             {newCourse.parts.map((part) => (
-
               <Course
                 key={part.id}
                 courseName={part.name}
-                exercise={part.exercises} />
-
+                exercise={part.exercises}
+              />
             ))}
             <SumExercises sum={total} />
           </>
         );
       })}
-
-      {/* {newCourse.parts.map((part) => (
-        ))} */}
     </>
   );
 };
