@@ -17,49 +17,81 @@ export const SumExercises = ({ sum }) => {
 };
 
 const App = () => {
-  const course = {
-    id: 1,
-    name: "Half Stack application development",
-    parts: [
-      {
-        name: "Fundamentals of React",
-        exercises: 10,
-        id: 1,
-      },
-      {
-        name: "Using props to pass data",
-        exercises: 7,
-        id: 2,
-      },
-      {
-        name: "State of a component",
-        exercises: 14,
-        id: 3,
-      },
-      {
-        name: "Redux",
-        exercises: 11,
-        id: 4,
-      },
-    ],
-  };
+  const course = [
+    {
+      name: "Half Stack application development",
+      id: 1,
+      parts: [
+        {
+          name: "Fundamentals of React",
+          exercises: 10,
+          id: 1,
+        },
+        {
+          name: "Using props to pass data",
+          exercises: 7,
+          id: 2,
+        },
+        {
+          name: "State of a component",
+          exercises: 14,
+          id: 3,
+        },
+        {
+          name: "Redux",
+          exercises: 11,
+          id: 4,
+        },
+      ],
+    },
+    {
+      name: "Node.js",
+      id: 2,
+      parts: [
+        {
+          name: "Routing",
+          exercises: 3,
+          id: 1,
+        },
+        {
+          name: "Middlewares",
+          exercises: 7,
+          id: 2,
+        },
+      ],
+    },
+  ];
 
-
-  const sum = course.parts.map((part) => part.exercises).reduce((accumulator, newValue) => accumulator + newValue, 0)
-  console.log('sum', sum);
-
+  // const total = course.map((item) => {
+  //   const newExercise = item.parts;
+  //   const sum = newExercise.map((exercise) => exercise.exercises).reduce((accumulator, newValue) => accumulator + newValue, 0)
+  //   console.log('total value', sum);
+  //   return sum
+  // }) //.reduce((accumulator, newValue) => accumulator + newValue, 0)
+// console.log('total', total);
   return (
     <>
-      <Header title={course.name} />
-      {course.parts.map((part) => (
-        <Course
-          key={part.id}
-          courseName={part.name}
-          exercise={part.exercises}
-        />
-      ))}
+      {course.map((newCourse) => {
+        const total = newCourse.parts.reduce((acc, part) => acc + part.exercises, 0)
+        console.log('total', newCourse.parts);
+        return (
+          <>
+            <Header key={newCourse.id} title={newCourse.name} />
+            {newCourse.parts.map((part) => (
 
-      <SumExercises sum={sum} />
+              <Course
+                key={part.id}
+                courseName={part.name}
+                exercise={part.exercises} />
+
+            ))}
+            <SumExercises sum={total} />
+          </>
+        );
+      })}
+
+      {/* {newCourse.parts.map((part) => (
+        ))} */}
     </>
   );
 };
