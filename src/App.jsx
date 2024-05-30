@@ -40,7 +40,7 @@ const App = () => {
   }
 
   const filterValue = persons.filter((person) => {
-     return filter === person.name
+     return filter.toLocaleLowerCase() === person.name
   })
 
   console.log('ffilterva', filterValue);
