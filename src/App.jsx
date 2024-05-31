@@ -39,15 +39,9 @@ const App = () => {
     setFilter(event.target.value)
   }
 
-  const filterValue = persons.filter((person) => {
-     return filter.toLocaleLowerCase() === person.name
-  })
+  const filterValue = persons.filter((person) => person.name.toLowerCase().includes(filter.toLowerCase()))
 
-  console.log('ffilterva', filterValue);
-
-  const personsToShow = filterValue ? filterValue : persons
-
-  console.log('personToShow', personsToShow);
+  const personsToShow = filterValue.length > 0 ? filterValue : persons
 
   return (
     <div>
